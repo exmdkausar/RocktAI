@@ -1,0 +1,894 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>RocktAI - Home</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="icon" href="https://i.ibb.co.com/qFhTmY0b/Chat-GPT-Image-15-2025-09-12-33.png">
+
+<style>
+* { 
+    margin: 0; 
+    padding: 0; 
+    box-sizing: border-box; 
+}
+
+:root {
+    --primary: #4f46e5;
+    --primary2: #8b5cf6;
+    --dark-bg: #171717;
+    --light-bg: #ffffff;
+    --dark-text: #f9f9f9;
+    --light-text: #111827;
+    --border-light: rgba(0,0,0,0.1);
+    --border-dark: rgba(255,255,255,0.25);
+    --glass-light: rgba(0,0,0,0.05);
+    --glass-dark: rgba(255,255,255,0.1);
+    --footer-light: rgba(147,91,255,0.08);
+    --footer-dark: rgba(147,91,255,0.15);
+    --transition: 0.3s ease;
+}
+
+body {
+    background: linear-gradient(180deg, #f7f0ff 0%, #e9dbff 45%, #ffffff 100%);
+    color: var(--light-text);
+    font-family: "Poppins", sans-serif;
+    overflow-x: hidden;
+    transition: var(--transition);
+}
+
+body.dark {
+    background: linear-gradient(180deg, #0f0f0f 0%, #1a0f29 50%, #171717 100%);
+    color: var(--dark-text);
+}
+
+/* Animations */
+.fade-in { 
+    opacity: 0; 
+    transform: translateY(-20px); 
+    animation: fadeInUp 1s forwards; 
+}
+.fade-delay-1 { animation-delay: 0.2s; }
+.fade-delay-2 { animation-delay: 0.4s; }
+.fade-delay-3 { animation-delay: 0.6s; }
+.fade-delay-4 { animation-delay: 0.8s; }
+.fade-delay-5 { animation-delay: 1s; }
+
+@keyframes fadeInUp { 
+    to { 
+        opacity: 1; 
+        transform: translateY(0); 
+    } 
+}
+
+/* HEADER */
+header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    padding: 20px 7%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    backdrop-filter: blur(20px);
+    background: rgba(255,255,255,0.85);
+    border-bottom: 1px solid var(--border-light);
+    transition: var(--transition);
+}
+
+body.dark header { 
+    background: rgba(23,23,23,0.85); 
+    border-bottom-color: var(--border-dark);
+}
+
+.logo { 
+    display: flex; 
+    align-items: center; 
+    gap: 12px; 
+}
+
+.logo img { 
+    width: 42px; 
+    height: 42px; 
+    object-fit: contain; 
+}
+
+.logo img.dark-logo { 
+    display: none; 
+}
+
+body.dark .logo img.light-logo { 
+    display: none; 
+}
+
+body.dark .logo img.dark-logo { 
+    display: block; 
+}
+
+.logo h2 { 
+    font-weight: 700; 
+    font-size: 1.55rem; 
+}
+
+/* Navigation */
+nav { 
+    display: flex; 
+    gap: 8px; 
+    align-items: center;
+}
+
+nav a {
+    color: inherit;
+    text-decoration: none;
+    font-weight: 500;
+    transition: var(--transition);
+    font-size: 0.95rem;
+    padding: 10px 18px;
+    border-radius: 10px;
+    position: relative;
+}
+
+nav a:hover { 
+    background: var(--glass-light);
+}
+
+body.dark nav a:hover {
+    background: var(--glass-dark);
+}
+
+nav a.active {
+    background: var(--glass-light);
+}
+
+body.dark nav a.active {
+    background: var(--glass-dark);
+}
+
+/* Header Actions */
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.btn-login {
+    padding: 10px 24px;
+    border: 2px solid var(--primary);
+    border-radius: 10px;
+    background: transparent;
+    color: var(--primary);
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: var(--transition);
+    text-decoration: none;
+    display: inline-block;
+}
+
+.btn-login:hover {
+    background: var(--primary);
+    color: white;
+    transform: translateY(-2px);
+}
+
+body.dark .btn-login {
+    border-color: var(--primary2);
+    color: var(--primary2);
+}
+
+body.dark .btn-login:hover {
+    background: var(--primary2);
+    color: white;
+}
+
+.btn-get-started {
+    padding: 10px 24px;
+    border: none;
+    border-radius: 10px;
+    background: linear-gradient(135deg, var(--primary), var(--primary2));
+    color: white;
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: var(--transition);
+    text-decoration: none;
+    display: inline-block;
+}
+
+.btn-get-started:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(79,70,229,0.3);
+}
+
+#themeToggle { 
+    cursor: pointer; 
+    width: 30px; 
+    height: 30px; 
+    transition: var(--transition); 
+}
+
+/* Hamburger Menu */
+#hamburger {
+    display: none;
+    width: 28px;
+    height: 20px;
+    position: relative;
+    cursor: pointer;
+}
+
+#hamburger span {
+    position: absolute;
+    width: 100%; 
+    height: 3px;
+    border-radius: 20px;
+    background: currentColor;
+    transition: var(--transition);
+}
+
+#hamburger span:nth-child(1) { top: 0; }
+#hamburger span:nth-child(2) { top: 50%; transform: translateY(-50%); }
+#hamburger span:nth-child(3) { bottom: 0; }
+
+/* Mobile Menu */
+#mobileMenuOverlay {
+    display: none;
+    position: fixed; 
+    inset: 0;
+    background: rgba(0,0,0,0.6);
+    backdrop-filter: blur(12px);
+    z-index: 1100;
+    justify-content: center;
+    align-items: center;
+}
+
+body.dark #mobileMenuOverlay {
+    background: rgba(0,0,0,0.8);
+}
+
+#mobileMenuContent { 
+    display: flex; 
+    flex-direction: column; 
+    gap: 32px; 
+    text-align: center; 
+    margin-top: -200px;
+}
+
+#mobileMenuContent a { 
+    font-size: 1.8rem; 
+    text-decoration: none; 
+    color: #fff; 
+    font-weight: 500;
+}
+
+.mobile-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-top: 20px;
+}
+
+.mobile-buttons .btn-login,
+.mobile-buttons .btn-get-started {
+    font-size: 1.1rem;
+    padding: 14px 32px;
+}
+
+#closeMenu {
+    position: fixed; 
+    top: 25px; 
+    right: 30px;
+    width: 40px; 
+    height: 40px;
+    cursor: pointer;
+    background: none; 
+    border: none; 
+    color: #fff;
+}
+
+#closeMenu::before, 
+#closeMenu::after {
+    content: "";
+    width: 30px; 
+    height: 3px;
+    background: currentColor;
+    position: absolute;
+    border-radius: 20px;
+}
+
+#closeMenu::before { transform: rotate(45deg); }
+#closeMenu::after { transform: rotate(-45deg); }
+
+/* HERO SECTION */
+.hero { 
+    text-align: center; 
+    margin-top: 70px; 
+    padding: 0 6%; 
+}
+
+.hero h1 { 
+    font-size: 4rem; 
+    line-height: 1.2; 
+    font-weight: 700; 
+    margin-bottom: 20px;
+    min-height: 2.4em;
+}
+
+.hero p { 
+    opacity: 0.85; 
+    margin-bottom: 40px; 
+    font-size: 1.25rem; 
+}
+
+/* Typing Animation */
+.typing-container {
+    display: inline-block;
+}
+
+.typed-text {
+    background: linear-gradient(135deg, var(--primary), var(--primary2));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.cursor {
+    display: inline-block;
+    width: 3px;
+    background: var(--primary);
+    margin-left: 4px;
+    animation: blink 0.7s infinite;
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+/* Generate Box */
+.generate-box {
+    width: 100%;
+    max-width: 850px;
+    margin: auto;
+    padding: 32px;
+    border-radius: 20px;
+    background: var(--glass-light);
+    border: 1px solid var(--border-light);
+    backdrop-filter: blur(25px);
+    box-shadow: 0 10px 40px rgba(0,0,0,0.05);
+    transition: var(--transition);
+}
+
+body.dark .generate-box {
+    background: var(--glass-dark);
+    border-color: var(--border-dark);
+    box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+}
+
+textarea {
+    width: 100%; 
+    height: 140px;
+    border: none;
+    border-radius: 14px;
+    padding: 18px;
+    font-size: 16px;
+    font-family: "Poppins", sans-serif;
+    resize: none;
+    outline: none;
+    background: rgba(255,255,255,0.6);
+    color: var(--light-text);
+    transition: var(--transition);
+}
+
+body.dark textarea { 
+    background: rgba(255,255,255,0.05); 
+    color: var(--dark-text);
+}
+
+textarea:focus {
+    background: rgba(255,255,255,0.8);
+}
+
+body.dark textarea:focus {
+    background: rgba(255,255,255,0.08);
+}
+
+button.generate {
+    padding: 14px 40px;
+    border: none;
+    border-radius: 12px;
+    font-size: 17px;
+    font-weight: 600;
+    cursor: pointer;
+    background: linear-gradient(135deg, var(--primary), var(--primary2));
+    color: white;
+    transition: var(--transition);
+    box-shadow: 0 4px 15px rgba(79,70,229,0.2);
+}
+
+button.generate:hover { 
+    transform: translateY(-2px); 
+    box-shadow: 0 8px 25px rgba(79,70,229,0.35);
+}
+
+/* Gallery Section */
+.gallery-title {
+    text-align: center;
+    font-size: 2.2rem;
+    margin: 110px 0 25px;
+    font-weight: 700;
+}
+
+.gallery-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 35px;
+    justify-content: center;
+    padding: 0 6%;
+}
+
+.gallery-card {
+    width: 350px;
+    height: 250px;
+    border-radius: 20px;
+    overflow: hidden;
+    background: var(--glass-light);
+    border: 1px solid var(--border-light);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+    transition: var(--transition);
+}
+
+body.dark .gallery-card { 
+    background: var(--glass-dark); 
+    border-color: var(--border-dark);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+}
+
+.gallery-card img { 
+    width: 100%; 
+    height: 100%; 
+    object-fit: cover; 
+    transition: var(--transition); 
+}
+
+.gallery-card:hover { 
+    transform: translateY(-5px);
+    box-shadow: 0 12px 35px rgba(0,0,0,0.15);
+}
+
+body.dark .gallery-card:hover {
+    box-shadow: 0 12px 35px rgba(0,0,0,0.6);
+}
+
+.gallery-card:hover img { 
+    transform: scale(1.06); 
+}
+
+.see-more-btn { 
+    padding: 12px 35px; 
+    border-radius: 12px; 
+    background: var(--light-text); 
+    color: var(--light-bg); 
+    text-decoration: none; 
+    font-weight: 600;
+    transition: var(--transition);
+    display: inline-block;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.see-more-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+}
+
+body.dark .see-more-btn { 
+    background: var(--dark-text); 
+    color: var(--dark-bg); 
+}
+
+body.dark .see-more-btn:hover {
+    box-shadow: 0 8px 25px rgba(255,255,255,0.15);
+}
+
+/* Footer */
+footer {
+    margin-top: 120px;
+    text-align: center;
+    padding: 70px 6%;
+    background: var(--footer-light);
+    border-top: 1px solid var(--border-light);
+    backdrop-filter: blur(22px);
+    border-radius: 30px 30px 0 0;
+    box-shadow: 0 -8px 25px rgba(0,0,0,0.06);
+    transition: var(--transition);
+}
+
+body.dark footer {
+    background: var(--footer-dark);
+    border-top-color: var(--border-dark);
+    box-shadow: 0 -8px 25px rgba(0,0,0,0.3);
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.footer-brand {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 30px;
+}
+
+.footer-brand span {
+    background: linear-gradient(135deg, var(--primary), var(--primary2));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.footer-links {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 35px;
+}
+
+.footer-links a {
+    color: inherit;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 10px;
+    transition: var(--transition);
+    font-weight: 500;
+    font-size: 0.95rem;
+}
+
+.footer-links a:hover {
+    background: var(--glass-light);
+}
+
+body.dark .footer-links a:hover {
+    background: var(--glass-dark);
+}
+
+.footer-divider {
+    opacity: 0.3;
+    font-weight: 600;
+    margin-top: 10px;
+}
+
+.footer-social {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    margin-bottom: 35px;
+}
+
+.footer-social a {
+    width: 45px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    background: var(--glass-light);
+    border: 1px solid var(--border-light);
+    transition: var(--transition);
+    text-decoration: none;
+}
+
+body.dark .footer-social a {
+    background: var(--glass-dark);
+    border-color: var(--border-dark);
+}
+
+.footer-social a:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 20px rgba(79,70,229,0.2);
+    background: linear-gradient(135deg, var(--primary), var(--primary2));
+    border-color: transparent;
+}
+
+body.dark .footer-social a:hover {
+    box-shadow: 0 6px 20px rgba(139,92,246,0.3);
+}
+
+.footer-social img {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+    transition: var(--transition);
+}
+
+.footer-social a:hover img {
+    filter: brightness(0) invert(1);
+}
+
+.footer-copyright {
+    opacity: 0.65;
+    font-size: 0.95rem;
+    font-weight: 400;
+}
+
+@media(max-width: 600px) {
+    .footer-links {
+        flex-direction: column;
+        gap: 8px;
+    }
+    
+    .footer-divider {
+        display: none;
+    }
+}
+
+/* Responsive Design */
+@media(max-width: 900px) { 
+    .hero h1 { 
+        font-size: 3rem; 
+    } 
+}
+
+@media(max-width: 768px) { 
+    nav { 
+        display: none; 
+    } 
+    
+    .header-actions .btn-login,
+    .header-actions .btn-get-started {
+        display: none;
+    }
+    
+    #hamburger { 
+        display: block; 
+    } 
+    
+    .hero h1 { 
+        font-size: 2.4rem; 
+    }
+    
+    .hero p {
+        font-size: 1.1rem;
+    }
+    
+    .generate-box {
+        padding: 24px;
+    }
+    
+    .gallery-card {
+        width: 100%;
+        max-width: 400px;
+    }
+}
+
+@media(max-width: 480px) {
+    header {
+        padding: 18px 5%;
+    }
+    
+    .hero {
+        margin-top: 60px;
+        padding: 0 5%;
+    }
+    
+    .hero h1 {
+        font-size: 2rem;
+    }
+    
+    .hero p {
+        font-size: 1rem;
+    }
+    
+    .gallery-container {
+        padding: 0 5%;
+    }
+}
+</style>
+</head>
+
+<body>
+<header class="fade-in fade-delay-1">
+    <div class="logo">
+        <img class="light-logo" src="https://i.ibb.co.com/qFhTmY0b/Chat-GPT-Image-15-2025-09-12-33.png" alt="Logo Light">
+        <img class="dark-logo" src="https://i.ibb.co.com/qFhTmY0b/Chat-GPT-Image-15-2025-09-12-33.png" alt="Logo Dark">
+        <h2>RocktAI</h2>
+    </div>
+
+    <nav>
+        <a href="/" class="active">Home</a>
+        <a href="/showcase">Showcase</a>
+        <a href="how it works.html">How it works</a>
+        <a href="/support">Support</a>
+    </nav>
+
+    <div class="header-actions">
+        <a href="#" class="btn-login">Login</a>
+        <a href="#" class="btn-get-started">Get Started</a>
+        <img id="themeToggle" src="https://image2url.com/images/1762538495298-42ceea6b-ce6b-425a-a30e-e74ec1f7c1d6.png" alt="Toggle Theme" />
+        <div id="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+</header>
+
+<!-- Mobile Menu -->
+<div id="mobileMenuOverlay">
+    <div id="mobileMenuContent">
+        <button id="closeMenu"></button>
+        <a href="/">Home</a>
+        <a href="/showcase">Showcase</a>
+        <a href="how it works.html">How it works</a>
+        <a href="/support">Support</a>
+        <div class="mobile-buttons">
+            <a href="#" class="btn-login">Login</a>
+            <a href="#" class="btn-get-started">Get Started</a>
+        </div>
+    </div>
+</div>
+
+<!-- HERO -->
+<section class="hero fade-in fade-delay-2">
+    <h1>
+        Get your website online<br>
+        <span class="typing-container">
+            in <span class="typed-text">minutes</span><span class="cursor">|</span> with AI
+        </span>
+    </h1>
+    <p>Turn your ideas into a fully functional website instantly with AI assistance.</p>
+
+    <div class="generate-box">
+        <textarea id="userInput" placeholder="Make me a website...">Make me a website...</textarea>
+        <div style="text-align:center; margin-top:18px;">
+            <button class="generate" id="sendBtn">Generate</button>
+        </div>
+        <div style="text-align:center; margin-top:12px;">
+            <a href="https://nothingsfy.dev" style="text-decoration:underline; color:inherit; opacity:0.7;">Also try nothingsfy</a>
+        </div>
+    </div>
+</section>
+
+<!-- GALLERY -->
+<h2 class="gallery-title fade-in fade-delay-3">Websites made with RocktAI</h2>
+<section class="gallery-container fade-in fade-delay-4">
+    <div class="gallery-card">
+        <img src="https://image2url.com/images/1762594850532-6b9ae435-4bfd-4bdf-8d6c-8a448a019d33.png" alt="Website Example 1">
+    </div>
+    <div class="gallery-card">
+        <img src="https://image2url.com/images/1762594883150-04691356-b404-46c4-b05c-0c45f0640eea.png" alt="Website Example 2">
+    </div>
+    <div class="gallery-card">
+        <img src="https://image2url.com/images/1762595132302-80d1fc72-e637-4cf1-ba57-becfe0bfeb4d.png" alt="Website Example 3">
+    </div>
+</section>
+
+<div style="text-align:center; margin:40px 0 80px;" class="fade-in fade-delay-5">
+    <a href="/showcase" class="see-more-btn">See More</a>
+</div>
+
+<footer class="fade-in fade-delay-5">
+    <div class="footer-content">
+        <div class="footer-brand">
+            Built with <span>RocktAI</span>
+        </div>
+
+        <div class="footer-links">
+            <a href="terms of service.html">Terms of Service</a>
+            <span class="footer-divider">•</span>
+            <a href="privacy policy.html">Privacy Policy</a>
+            <span class="footer-divider">•</span>
+            <a href="platform rules.html">Platform Rules</a>
+        </div>
+
+        <div class="footer-social">
+            <a href="https://instagram.com" target="_blank" aria-label="Instagram">
+                <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram">
+            </a>
+            <a href="https://facebook.com" target="_blank" aria-label="Facebook">
+                <img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="Facebook">
+            </a>
+            <a href="https://discord.com" target="_blank" aria-label="Discord">
+                <img src="https://cdn-icons-png.flaticon.com/512/2111/2111370.png" alt="Discord">
+            </a>
+        </div>
+
+        <div class="footer-copyright">
+            © 2025 RocktAI — All rights reserved.
+        </div>
+    </div>
+</footer>
+
+<script>
+const hamburger = document.getElementById("hamburger");
+const mobileMenuOverlay = document.getElementById("mobileMenuOverlay");
+const closeMenu = document.getElementById("closeMenu");
+const themeToggle = document.getElementById("themeToggle");
+
+// Mobile menu
+hamburger.onclick = () => { 
+    mobileMenuOverlay.style.display = "flex"; 
+};
+
+closeMenu.onclick = () => { 
+    mobileMenuOverlay.style.display = "none"; 
+};
+
+// Close mobile menu when clicking outside content
+mobileMenuOverlay.onclick = (e) => {
+    if (e.target === mobileMenuOverlay) {
+        mobileMenuOverlay.style.display = "none";
+    }
+};
+
+// Dark/Light Mode Toggle
+const sunIcon = "https://image2url.com/images/1762538495298-42ceea6b-ce6b-425a-a30e-e74ec1f7c1d6.png";
+const moonIcon = "https://image2url.com/images/1762538458121-f26b0c80-94b3-4463-81cf-d7fb6d08419c.png";
+
+if (localStorage.getItem("darkMode") === "true") {
+    document.body.classList.add("dark");
+    themeToggle.src = moonIcon;
+}
+
+themeToggle.onclick = () => {
+    document.body.classList.toggle("dark");
+    const dark = document.body.classList.contains("dark");
+    localStorage.setItem("darkMode", dark);
+    themeToggle.src = dark ? moonIcon : sunIcon;
+};
+
+// Typing Animation
+const words = ["minutes", "seconds", "no time"];
+let wordIndex = 0;
+let charIndex = 0;
+let isDeleting = false;
+const typedTextElement = document.querySelector(".typed-text");
+const typingSpeed = 150;
+const deletingSpeed = 100;
+const pauseTime = 2000;
+
+function typeEffect() {
+    const currentWord = words[wordIndex];
+    
+    if (isDeleting) {
+        typedTextElement.textContent = currentWord.substring(0, charIndex - 1);
+        charIndex--;
+    } else {
+        typedTextElement.textContent = currentWord.substring(0, charIndex + 1);
+        charIndex++;
+    }
+    
+    if (!isDeleting && charIndex === currentWord.length) {
+        setTimeout(() => {
+            isDeleting = true;
+            typeEffect();
+        }, pauseTime);
+        return;
+    }
+    
+    if (isDeleting && charIndex === 0) {
+        isDeleting = false;
+        wordIndex = (wordIndex + 1) % words.length;
+    }
+    
+    const speed = isDeleting ? deletingSpeed : typingSpeed;
+    setTimeout(typeEffect, speed);
+}
+
+// Start typing animation after page loads
+setTimeout(typeEffect, 1000);
+
+// Generate Button
+const userInput = document.getElementById("userInput");
+const sendBtn = document.getElementById("sendBtn");
+
+sendBtn.onclick = () => {
+    const text = userInput.value.trim();
+    if (!text) return;
+    localStorage.setItem("userMessage", text);
+    window.location.href = "chat.html";
+};
+</script>
+</body>
+</html>
